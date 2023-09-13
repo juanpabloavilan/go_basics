@@ -1,20 +1,33 @@
 package slices
 
-import (
-	"fmt"
-)
+func Sum(numbers []int) int {
+	var sum int
+	for _, value := range numbers {
+		sum += value
+	}
+	return sum
+}
 
-func SlicesLab() {
+func SumAll(numberToSum ...[]int) []int {
+	var sums []int
 
-	s := make([]int, 2)
-	s[0] = 2
+	for _, numbers := range numberToSum {
+		sums = append(sums, Sum(numbers))
+	}
 
-	fmt.Println(s)
+	return sums
+}
 
-	s = append(s, 3, 4)
+func SumAllTails(numbersToSum ...[]int) []int {
+	var sums []int
+	for _, numbers := range numbersToSum {
+		if len(numbers) == 0 {
+			sums = append(sums, 0)
+			continue
+		}
+		tails := numbers[1:]
+		sums = append(sums, Sum(tails))
+	}
 
-	fmt.Println(s)
-
-	c := make([]int, len(s))
-	copy(c, s)
+	return sums
 }
